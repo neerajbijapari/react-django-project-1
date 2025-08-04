@@ -15,7 +15,22 @@ def PatientCreate(request):
     if serializer.is_valid():
         serializer.save()
         return Response({'status': 'success'})
-    return Response(serializer.errors, status=400)  # return errors if invalid
+    return Response(serializer.errors, status=400)
+
+@api_view(['PUT'])
+def PatientUpdate(request, id):
+    try:
+        patient = Patient.objects.get(id=id)
+    except Patient.DoesNotExist:
+        return Response({'error': 'Patient not found'}, status=404)
+
+    serializer = PatientSerializer(patient, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'status': 'updated successfully', 'data': serializer.data})
+    
+    return Response(serializer.errors, status=400)
+
 
 @api_view(['DELETE'])
 def PatientDelete(request, id):  # ✅ Fixed: changed from `i` to `id`

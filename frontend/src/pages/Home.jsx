@@ -1,125 +1,111 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Users, UserPlus, Activity, FileText } from 'lucide-react'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Users, UserPlus, Activity, FileText } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-100 py-10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-16">
+          <h1 className="text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-purple-600 mb-4">
             Welcome to CureCloud
           </h1>
-          <p className="text-xl text-gray-600">
-            Manage your patients efficiently and securely
+          <p className="text-lg text-gray-700">
+            Manage your patients efficiently, securely, and intelligently.
           </p>
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
-            <div className="flex items-center">
-              <Users className="h-8 w-8 text-blue-500" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Total Patients</p>
-                <p className="text-2xl font-bold text-gray-900">248</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
-            <div className="flex items-center">
-              <Activity className="h-8 w-8 text-green-500" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Active Cases</p>
-                <p className="text-2xl font-bold text-gray-900">45</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-purple-500">
-            <div className="flex items-center">
-              <FileText className="h-8 w-8 text-purple-500" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Records Today</p>
-                <p className="text-2xl font-bold text-gray-900">12</p>
-              </div>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <StatCard icon={<Users size={28} />} label="Total Patients" value="248" color="blue" />
+          <StatCard icon={<Activity size={28} />} label="Active Cases" value="45" color="green" />
+          <StatCard icon={<FileText size={28} />} label="Records Today" value="12" color="purple" />
         </div>
 
         {/* Main Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* View Patients */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200">
-            <div className="p-8 text-center">
-              <Users className="h-16 w-16 text-blue-500 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">View Patients</h3>
-              <p className="text-gray-600 mb-6">
-                Browse and manage your patient database. View patient records, medical history, and contact information.
-              </p>
-              <Link 
-                to="/patients"
-                className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
-              >
-                <Users className="h-5 w-5 mr-2" />
-                View All Patients
-              </Link>
-            </div>
-          </div>
-
-          {/* Add Patient */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200">
-            <div className="p-8 text-center">
-              <UserPlus className="h-16 w-16 text-green-500 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Add New Patient</h3>
-              <p className="text-gray-600 mb-6">
-                Register a new patient to the system. Add personal information, medical details, and contact data.
-              </p>
-              <Link 
-                to="/patients/add"
-                className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors duration-200"
-              >
-                <UserPlus className="h-5 w-5 mr-2" />
-                Add New Patient
-              </Link>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
+          <ActionCard
+            icon={<Users size={40} />}
+            title="View Patients"
+            description="Browse and manage your patient database. View patient records, medical history, and contact information."
+            buttonLabel="View All Patients"
+            link="/patients"
+            color="blue"
+          />
+          <ActionCard
+            icon={<UserPlus size={40} />}
+            title="Add New Patient"
+            description="Register a new patient to the system. Add personal information, medical details, and contact data."
+            buttonLabel="Add New Patient"
+            link="/patients/add"
+            color="green"
+          />
         </div>
 
         {/* Recent Activity */}
         <div className="mt-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Recent Activity</h2>
-          <div className="bg-white rounded-lg shadow-md">
-            <div className="p-6">
-              <div className="space-y-4">
-                <div className="flex items-center p-4 bg-gray-50 rounded-lg">
-                  <div className="h-2 w-2 bg-green-400 rounded-full mr-4"></div>
-                  <div>
-                    <p className="font-medium text-gray-900">New patient registered: John Smith</p>
-                    <p className="text-sm text-gray-600">2 hours ago</p>
-                  </div>
-                </div>
-                <div className="flex items-center p-4 bg-gray-50 rounded-lg">
-                  <div className="h-2 w-2 bg-blue-400 rounded-full mr-4"></div>
-                  <div>
-                    <p className="font-medium text-gray-900">Patient record updated: Sarah Johnson</p>
-                    <p className="text-sm text-gray-600">4 hours ago</p>
-                  </div>
-                </div>
-                <div className="flex items-center p-4 bg-gray-50 rounded-lg">
-                  <div className="h-2 w-2 bg-purple-400 rounded-full mr-4"></div>
-                  <div>
-                    <p className="font-medium text-gray-900">Medical report generated for Michael Brown</p>
-                    <p className="text-sm text-gray-600">6 hours ago</p>
-                  </div>
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Recent Activity</h2>
+          <div className="bg-white shadow rounded-lg divide-y divide-gray-200">
+            {[
+              { label: 'New patient registered: John Smith', time: '2 hours ago', dot: 'bg-green-400' },
+              { label: 'Patient record updated: Sarah Johnson', time: '4 hours ago', dot: 'bg-blue-400' },
+              { label: 'Medical report generated: Michael Brown', time: '6 hours ago', dot: 'bg-purple-400' },
+            ].map((item, index) => (
+              <div key={index} className="flex items-start p-5 hover:bg-gray-50 transition">
+                <span className={`h-3 w-3 mt-1 rounded-full ${item.dot} mr-4`} />
+                <div>
+                  <p className="text-gray-800 font-medium">{item.label}</p>
+                  <p className="text-sm text-gray-500">{item.time}</p>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
+
       </div>
     </div>
-  )
+  );
+}
+
+// Stat card component
+function StatCard({ icon, label, value, color }) {
+  const colors = {
+    blue: 'text-blue-600 bg-blue-100',
+    green: 'text-green-600 bg-green-100',
+    purple: 'text-purple-600 bg-purple-100'
+  };
+  return (
+    <div className="bg-white rounded-xl shadow-md p-6 flex items-center space-x-4">
+      <div className={`p-3 rounded-full ${colors[color]}`}>
+        {icon}
+      </div>
+      <div>
+        <p className="text-sm text-gray-500">{label}</p>
+        <p className="text-2xl font-bold text-gray-800">{value}</p>
+      </div>
+    </div>
+  );
+}
+
+// Action card component
+function ActionCard({ icon, title, description, buttonLabel, link, color }) {
+  const buttonColor = {
+    blue: 'bg-blue-600 hover:bg-blue-700',
+    green: 'bg-green-600 hover:bg-green-700'
+  };
+  return (
+    <div className="bg-white rounded-xl shadow-md p-8 text-center hover:shadow-lg transition">
+      <div className="mb-4 text-center text-gray-600">{icon}</div>
+      <h3 className="text-xl font-semibold text-gray-900 mb-3">{title}</h3>
+      <p className="text-gray-600 mb-6">{description}</p>
+      <Link
+        to={link}
+        className={`inline-block px-6 py-3 text-white rounded-lg font-medium transition-colors ${buttonColor[color]}`}
+      >
+        {buttonLabel}
+      </Link>
+    </div>
+  );
 }
